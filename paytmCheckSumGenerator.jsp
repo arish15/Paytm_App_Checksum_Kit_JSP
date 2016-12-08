@@ -7,12 +7,10 @@
 				com.paytm.merchant.CheckSumServiceHelper"%>
 <%
 
-Map<String, String[]> map = request.getParameterMap();
+	Map<String, String[]> map = request.getParameterMap();
         Set<Map.Entry<String, String[]>> entrySet = map.entrySet();
 
         TreeMap<String,String> parameters = new TreeMap<>();
-        String paytmChecksum =  "";
-
         for (Map.Entry<String, String[]> entry : entrySet) {
             parameters.put(entry.getKey(), entry.getValue()[0]);
         }
