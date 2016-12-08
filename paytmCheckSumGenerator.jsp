@@ -7,15 +7,15 @@
 				com.paytm.merchant.CheckSumServiceHelper"%>
 <%
 
+Map<String, String[]> map = request.getParameterMap();
+        Set<Map.Entry<String, String[]>> entrySet = map.entrySet();
 
-Enumeration<String> paramNames = request.getParameterNames();
-Map<String, String[]> mapData = request.getParameterMap();
-TreeMap<String,String> parameters = new TreeMap<String,String>();
-String paytmChecksum =  "";
-while(paramNames.hasMoreElements()) {
-	String paramName = (String)paramNames.nextElement();
-	parameters.put(paramName,mapData.get(paramName)[0]);	
-}
+        TreeMap<String,String> parameters = new TreeMap<>();
+        String paytmChecksum =  "";
+
+        for (Map.Entry<String, String[]> entry : entrySet) {
+            parameters.put(entry.getKey(), entry.getValue()[0]);
+        }
 
 String checkSum =  CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum("PAYTM MERCHANT KEY", parameters);
 parameters.put("CHECKSUMHASH",checkSum);
